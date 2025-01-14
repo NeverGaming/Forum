@@ -1,0 +1,1218 @@
+/* 基础样式 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    min-height: 100vh;
+}
+
+/* 主容器布局 */
+.main-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 200px minmax(600px, 1fr) 250px; /* 减小左侧边栏宽度 */
+    gap: 15px; /* 减小间距 */
+    min-height: calc(100vh - 60px);
+}
+
+/* 左侧边栏 */
+.sidebar-left {
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 主内容区 */
+.main-content {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    min-width: 0; /* 防止内容溢出 */
+}
+
+/* 右侧边栏 */
+.sidebar-right {
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .main-container {
+        grid-template-columns: 180px 1fr 220px; /* 更窄的侧边栏 */
+    }
+}
+
+@media (max-width: 992px) {
+    .main-container {
+        grid-template-columns: 160px 1fr; /* 隐藏右侧边栏，左侧更窄 */
+    }
+    .sidebar-right {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .main-container {
+        grid-template-columns: 1fr; /* 在移动端只显示主内容 */
+        padding: 10px;
+    }
+    .sidebar-left {
+        display: none;
+    }
+}
+
+/* 头像样式 */
+.avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* 表单样式 */
+form {
+    margin: 20px 0;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    padding: 8px 16px;
+    background: #1a73e8;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1557b0;
+}
+
+/* 模态框样式 */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #333;
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.form-group textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.primary-btn {
+    background: #1a73e8;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background: #f1f3f4;
+    color: #333;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.primary-btn:hover {
+    background: #1557b0;
+}
+
+.cancel-btn:hover {
+    background: #e8eaed;
+}
+
+/* 个人资料页面特定样式 */
+.profile-container {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 24px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.user-info {
+    flex-grow: 1;
+}
+
+.user-stats {
+    display: flex;
+    gap: 20px;
+    margin-top: 12px;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.stat-value {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #1a73e8;
+}
+
+/* 标签页样式 */
+.tabs {
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+}
+
+.tab.active {
+    border-bottom-color: #1a73e8;
+    color: #1a73e8;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* 帖子和评论列表样式 */
+.post-list, .comment-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.post-item, .comment-item {
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+}
+
+/* 图片上传预览样式 */
+.image-preview {
+    margin: 10px 0;
+    max-width: 300px;
+}
+
+.image-preview img {
+    max-width: 100%;
+    border-radius: 4px;
+}
+
+/* 帖子卡片样式 */
+.post-card {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    border: none;
+    margin: 0;
+}
+
+/* 帖子列表容器样式 */
+#postsList {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding: 20px;
+}
+
+/* 帖子标题样式 */
+.post-title {
+    margin: 0 0 20px 0;
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+/* 帖子图片容器 */
+.post-image {
+    margin: 16px 0;
+    text-align: center;
+    max-width: 100%;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.post-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
+    object-fit: contain;
+}
+
+/* 帖子元信息布局 */
+.post-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 20px;
+    border-top: 2px solid #f0f0f0;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* 作者信息样式 */
+.post-author {
+    color: #666;
+}
+
+/* 发布时间样式 */
+.post-date {
+    color: #666;
+}
+
+/* 跟帖数样式 */
+.post-comments {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: auto;
+}
+
+.comment-icon {
+    font-size: 1em;
+    color: #666;
+}
+
+/* 帖子列表中的小头像 */
+img.post-list-avatar {
+    width: 12px !important;
+    height: 12px !important;
+    min-width: 12px !important;
+    min-height: 12px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid #eee;
+    vertical-align: middle;
+    flex-shrink: 0;
+}
+
+/* 评论中的头像 */
+.comment-avatar {
+    width: 24px;  /* 评论区的头像可以稍微大一点 */
+    height: 24px;
+    border-radius: 50%;
+    margin-right: 8px;
+    object-fit: cover;
+    border: 1px solid #eee;
+}
+
+/* 个人资料页面的大头像（保持原样） */
+.profile-container .avatar-section .avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #eee;
+}
+
+/* 悬停效果 */
+.post-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    background-color: #fafafa;
+}
+
+/* 个人中心链接样式 */
+.profile-link {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 0 10px;
+    color: #1a73e8;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.profile-link:hover {
+    background-color: rgba(26, 115, 232, 0.1);
+    text-decoration: none;
+}
+
+/* 用户信息区域样式 */
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#currentUser {
+    color: #333;
+}
+
+/* 点赞按钮样式 */
+.like-button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.like-button:hover {
+    background: #f5f5f5;
+}
+
+.like-button.liked {
+    background: #e3f2fd;
+    border-color: #1a73e8;
+    color: #1a73e8;
+}
+
+.like-icon {
+    font-size: 14px;
+}
+
+.like-count {
+    font-size: 12px;
+    color: #666;
+}
+
+.comment-actions {
+    margin-top: 8px;
+    display: flex;
+    gap: 8px;
+}
+
+/* 评论项样式 */
+.comment-item {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.comment-content {
+    margin: 8px 0;
+    color: #333;
+}
+
+.comment-meta {
+    display: flex;
+    justify-content: flex-end;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.like-count {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+/* 返回按钮样式 */
+.back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    margin-bottom: 20px;
+    background: #f1f3f4;
+    color: #333;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.back-button:hover {
+    background: #e8eaed;
+    text-decoration: none;
+}
+
+.back-icon {
+    font-size: 18px;
+    line-height: 1;
+}
+
+/* 调整个人资料容器的内边距 */
+.profile-container {
+    padding: 24px;
+}
+
+/* 分类和标签样式 */
+.post-categories {
+    margin: 10px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.category-tag {
+    background: #1a73e8;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+.tag {
+    background: #f1f3f4;
+    color: #333;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+}
+
+/* 发帖表单中的分类选择样式 */
+#postCategory {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+}
+
+/* 标签输入框样式 */
+#postTags {
+    width: 100%;
+    padding: 8px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* 筛选区域样式 */
+.filter-section {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding: 16px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.category-filter select,
+.tag-search input {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    min-width: 150px;
+}
+
+.category-filter select:focus,
+.tag-search input:focus {
+    outline: none;
+    border-color: #1a73e8;
+}
+
+/* 热门标签样式 */
+.popular-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 16px;
+}
+
+.popular-tags .tag {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.popular-tags .tag:hover {
+    background: #e8eaed;
+}
+
+.tag.selected {
+    background: #1a73e8;
+    color: white;
+}
+
+/* 相关帖子样式 */
+.related-posts {
+    margin-top: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.related-posts h3 {
+    margin-bottom: 16px;
+    color: #333;
+}
+
+.related-posts-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px;
+}
+
+.related-post-card {
+    padding: 12px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.related-post-card:hover {
+    background: #f1f3f4;
+    transform: translateY(-2px);
+}
+
+.related-post-card h4 {
+    margin: 0 0 8px 0;
+    font-size: 1em;
+    color: #333;
+}
+
+/* 错误消息样式 */
+.error-message {
+    color: #d32f2f;
+    padding: 16px;
+    background: #ffebee;
+    border-radius: 4px;
+    margin: 10px 0;
+    text-align: center;
+}
+
+/* 无数据提示样式 */
+.no-data {
+    color: #666;
+    text-align: center;
+    padding: 20px;
+    background: #f5f5f5;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+/* 评论操作按钮样式 */
+.comment-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.edit-btn, .delete-btn {
+    padding: 4px 8px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9em;
+}
+
+.edit-btn {
+    background: #e3f2fd;
+    color: #1a73e8;
+}
+
+.delete-btn {
+    background: #ffebee;
+    color: #d32f2f;
+}
+
+.edit-btn:hover {
+    background: #bbdefb;
+}
+
+.delete-btn:hover {
+    background: #ffcdd2;
+}
+
+/* 编辑表单模态框样式 */
+.edit-form-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.edit-form-content {
+    background: white;
+    padding: 24px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+
+.edit-form-content h3 {
+    margin-bottom: 16px;
+    color: #333;
+}
+
+.edit-form-content input,
+.edit-form-content select,
+.edit-form-content textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.edit-form-content textarea {
+    min-height: 200px;
+    resize: vertical;
+}
+
+.form-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.form-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.form-buttons button[type="submit"] {
+    background: #1a73e8;
+    color: white;
+}
+
+.form-buttons button[type="button"] {
+    background: #f1f3f4;
+    color: #333;
+}
+
+/* 标签输入和预览样式 */
+.tags-input-container {
+    margin-bottom: 16px;
+}
+
+.tags-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.tags-preview .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    background: #f1f3f4;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.remove-tag {
+    cursor: pointer;
+    color: #666;
+    font-size: 1.2em;
+    line-height: 1;
+}
+
+.remove-tag:hover {
+    color: #d32f2f;
+}
+
+/* 图片编辑部分样式 */
+.image-edit-section {
+    margin: 16px 0;
+}
+
+.current-image {
+    margin-bottom: 16px;
+    position: relative;
+}
+
+.current-image img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 4px;
+}
+
+.remove-image {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255, 0, 0, 0.8);
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.image-upload {
+    margin-top: 12px;
+}
+
+#editImagePreview {
+    margin-top: 8px;
+    position: relative;
+}
+
+#editImagePreview img {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 4px;
+}
+
+#editImagePreview button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+/* 帖子详情页的图片样式 */
+.post-container .post-image {
+    max-height: 500px; /* 设置最大高度 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f8f9fa;
+}
+
+.post-container .post-image img {
+    max-height: 500px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* 编辑表单中的图片预览样式 */
+.current-image img,
+#editImagePreview img {
+    max-width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    border-radius: 4px;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .post-container .post-image {
+        max-height: 300px;
+    }
+    
+    .post-container .post-image img {
+        max-height: 300px;
+    }
+}
+
+/* 帖子详情页样式 */
+.post-detail {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 帖子详情页的图片容器样式 */
+.post-detail .post-image {
+    width: 100%;
+    margin: 20px 0;
+    text-align: center;
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* 帖子详情页的图片样式 */
+.post-detail .post-image img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    max-height: 600px; /* 设置最大高度 */
+    display: block;
+    margin: 0 auto;
+    object-fit: contain; /* 保持图片比例 */
+}
+
+/* 帖子内容区域样式 */
+.post-detail .post-content {
+    margin: 20px 0;
+    line-height: 1.6;
+    color: #333;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .post-detail {
+        padding: 15px;
+    }
+
+    .post-detail .post-image img {
+        max-height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .post-detail .post-image img {
+        max-height: 300px;
+    }
+}
+
+/* 帖子标签样式 */
+.post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 10px 0;
+}
+
+.tag {
+    display: inline-flex;
+    align-items: center;
+    background: #f1f3f4;
+    color: #333;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    line-height: 1.2;
+}
+
+.tag:before {
+    content: '#';
+    margin-right: 2px;
+    color: #666;
+}
+
+/* 帖子详情页的标签样式 */
+.post-detail .post-tags {
+    margin: 15px 0;
+}
+
+.post-detail .tag {
+    background: #e8eaed;
+    transition: all 0.2s;
+}
+
+.post-detail .tag:hover {
+    background: #dadce0;
+}
+
+/* 分类标签样式 */
+.category-tag {
+    display: inline-flex;
+    align-items: center;
+    background: #1a73e8;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
+
+/* 标签和分类容器 */
+.post-categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 12px 0;
+    align-items: center;
+}
+
+/* 帖子详情页容器样式 */
+.post-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* 帖子内容区域样式 */
+.post-body {
+    width: 100%;
+    overflow: hidden; /* 防止内容溢出 */
+}
+
+/* 帖子图片容器样式 */
+.post-body .post-image {
+    width: 100%;
+    margin: 20px 0;
+    text-align: center;
+    background: #f8f9fa;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* 帖子图片样式 */
+.post-body .post-image img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+/* 帖子内容文本样式 */
+.post-body .post-content {
+    margin: 20px 0;
+    line-height: 1.6;
+    color: #333;
+    word-wrap: break-word; /* 确保长文本会换行 */
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .post-container {
+        padding: 15px;
+        margin: 10px;
+    }
+}
+
+/* 话题导航侧边栏 */
+.topics-sidebar {
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+    background: white;
+    border-radius: 12px;
+    padding: 15px; /* 减小内边距 */
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.topics-nav h3 {
+    margin: 0 0 16px 0;
+    color: #333;
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+.topics-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.topic-item {
+    display: flex;
+    align-items: center;
+    padding: 8px 12px; /* 减小内边距 */
+    border-radius: 6px;
+    color: #666;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    font-size: 0.9em; /* 稍微减小字体 */
+}
+
+.topic-item:hover {
+    background: #f0f2f5;
+    color: #1a73e8;
+}
+
+.topic-item.active {
+    background: #e8f0fe;
+    color: #1a73e8;
+    font-weight: 500;
+}
+
+.topic-icon {
+    margin-right: 8px; /* 减小图标间距 */
+    font-size: 1.1em;
+}
+
+/* 响应式设计调整 */
+@media (max-width: 992px) {
+    .topics-sidebar {
+        display: none; /* 在小屏幕上隐藏侧边栏 */
+    }
+}
+
+/* 在小屏幕上显示话题下拉菜单 */
+@media (max-width: 992px) {
+    .topics-dropdown {
+        display: block;
+        margin-bottom: 20px;
+    }
+    
+    .topics-dropdown select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        background: white;
+        font-size: 0.95em;
+    }
+}
+
+/* 推荐话题区域样式 */
+.trending-topics {
+    margin: 20px 0;
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.trending-topics h2 {
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+/* 话题列表横向布局 */
+.topic-list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 三列布局 */
+    gap: 15px;
+}
+
+/* 话题项样式 */
+.topic-item {
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    border: 1px solid #eee;
+}
+
+.topic-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+}
+
+.topic-item img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+}
+
+.topic-item h3 {
+    padding: 10px;
+    margin: 0;
+    font-size: 1em;
+    color: #333;
+}
+
+.topic-item p {
+    padding: 0 10px 10px;
+    margin: 0;
+    color: #666;
+    font-size: 0.9em;
+}
+
+/* 响应式调整 */
+@media (max-width: 992px) {
+    .topic-list {
+        grid-template-columns: repeat(2, 1fr); /* 两列 */
+    }
+}
+
+@media (max-width: 576px) {
+    .topic-list {
+        grid-template-columns: 1fr; /* 单列 */
+    }
+} 

@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>嘚嘚</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <!-- 左侧话题导航栏 -->
+        <aside class="topics-sidebar">
+            <div class="topics-nav">
+                <h3>话题导航</h3>
+                <nav class="topics-list">
+                    <a href="#" class="topic-item active">
+                        <span class="topic-icon">🌐</span>
+                        全部话题
+                    </a>
+                    <a href="#" class="topic-item">
+                        <span class="topic-icon">📰</span>
+                        新闻时事
+                    </a>
+                    <a href="#" class="topic-item">
+                        <span class="topic-icon">💻</span>
+                        科技数码
+                    </a>
+                    <a href="#" class="topic-item">
+                        <span class="topic-icon">🎮</span>
+                        游戏动漫
+                    </a>
+                    <a href="#" class="topic-item">
+                        <span class="topic-icon">🎬</span>
+                        影视娱乐
+                    </a>
+                    <a href="#" class="topic-item">
+                        <span class="topic-icon">📚</span>
+                        文化教育
+                    </a>
+                    <a href="#" class="topic-item">
+                        <span class="topic-icon">💪</span>
+                        体育运动
+                    </a>
+                    <a href="#" class="topic-item">
+                        <span class="topic-icon">🍔</span>
+                        美食生活
+                    </a>
+                </nav>
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <h1>嘚嘚</h1>
+            
+            <div class="auth-container">
+                <div id="authButtons" class="auth-buttons">
+                    <button onclick="showLoginForm()">登录</button>
+                    <button onclick="showRegisterForm()">注册</button>
+                </div>
+                <div id="userInfo" class="user-info" style="display: none;">
+                    <span id="currentUser"></span>
+                    <a href="/profile.html" class="profile-link">个人中心</a>
+                    <button onclick="logout()">退出</button>
+                </div>
+            </div>
+
+            <!-- 登录表单 -->
+            <div id="loginForm" class="auth-form" style="display: none;">
+                <h2>登录</h2>
+                <form onsubmit="login(event)">
+                    <input type="text" id="loginUsername" placeholder="用户名" required>
+                    <input type="password" id="loginPassword" placeholder="密码" required>
+                    <button type="submit">登录</button>
+                    <button type="button" onclick="hideAuthForms()">取消</button>
+                </form>
+            </div>
+
+            <!-- 注册表单 -->
+            <div id="registerForm" class="auth-form" style="display: none;">
+                <h2>注册</h2>
+                <form onsubmit="register(event)">
+                    <input type="text" id="registerUsername" placeholder="用户名" required>
+                    <input type="password" id="registerPassword" placeholder="密码" required>
+                    <input type="password" id="confirmPassword" placeholder="确认密码" required>
+                    <button type="submit">注册</button>
+                    <button type="button" onclick="hideAuthForms()">取消</button>
+                </form>
+            </div>
+
+            <!-- 添加发帖区域 -->
+            <div class="post-creation">
+                <button id="togglePostForm" class="toggle-post-btn" onclick="togglePostForm()">发布新帖子</button>
+                <form id="newPostForm" onsubmit="submitPost(event)" enctype="multipart/form-data" style="display: none;">
+                    <input type="text" id="postTitle" placeholder="输入标题" required>
+                    
+                    <!-- 添加分类选择 -->
+                    <select id="postCategory" required>
+                        <option value="">选择分类</option>
+                        <option value="技术">技术</option>
+                        <option value="生活">生活</option>
+                        <option value="游戏">游戏</option>
+                        <option value="新闻">新闻</option>
+                        <option value="其他">其他</option>
+                    </select>
+                    
+                    <!-- 添加标签输入 -->
+                    <input type="text" id="postTags" placeholder="添加标签（用逗号分隔）">
+                    
+                    <textarea id="postContent" placeholder="分享你的想法..." required></textarea>
+                    <div class="image-upload">
+                        <input type="file" id="postImage" name="image" accept="image/*" onchange="previewImage(event)">
+                        <div id="imagePreview"></div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit">发布</button>
+                        <button type="button" class="cancel-btn" onclick="togglePostForm()">取消</button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- 搜索栏 -->
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="搜索话题...">
+                <button type="button" onclick="search()">搜索</button>
+            </div>
+
+            <!-- 推荐话题区域 -->       
+            <div class="trending-topics">
+                <h2>推荐</h2>
+                <div class="topic-list">
+                    <div class="topic-item">
+                        <img src="images/trump.jpg" alt="话题图片">
+                        <h3>特朗普当选下一任美国总统</h3>
+                        <p>讨论热度：10.2万</p>
+                    </div>
+                    <div class="topic-item">
+                        <img src="images/641.jpg" alt="话题图片">
+                        <h3>日本外相访华</h3>
+                        <p>讨论热度：8.5万</p>
+                    </div>
+                    <div class="topic-item">
+                        <img src="images/fire.jpg" alt="话题图片">
+                        <h3>加州山火</h3>
+                        <p>讨论热度：15.3万</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 在帖子列表上方添加筛选区域 -->
+            <div class="filter-section">
+                <div class="category-filter">
+                    <select id="categoryFilter" onchange="filterPosts()">
+                        <option value="">全部分类</option>
+                        <option value="技术">技术</option>
+                        <option value="生活">生活</option>
+                        <option value="游戏">游戏</option>
+                        <option value="新闻">新闻</option>
+                        <option value="其他">其他</option>
+                    </select>
+                </div>
+                <div class="tag-search">
+                    <input type="text" id="tagSearch" placeholder="搜索标签" onkeyup="filterPosts()">
+                </div>
+            </div>
+
+            <!-- 添加帖子列表区域 -->
+            <div class="posts-section">
+                <h2>最新讨论</h2>
+                <div id="postsList">
+                    <!-- 帖子列表将在这里渲染 -->
+                </div>
+            </div>
+
+            <!-- 添加用户资料编辑表单 -->
+            <div id="profileForm" class="auth-form" style="display: none;">
+                <h2>编辑个人资料</h2>
+                <form onsubmit="updateProfile(event)">
+                    <div class="avatar-upload">
+                        <img id="currentAvatar" src="./images/default-avatar.png" alt="用户头像" 
+                             onerror="this.src='./images/default-avatar.png'">
+                        <input type="file" id="avatarInput" accept="image/*">
+                        <button type="button" onclick="uploadAvatar()">上传头像</button>
+                    </div>
+                    <input type="text" id="profileUsername" placeholder="用户名">
+                    <button type="submit">保存</button>
+                    <button type="button" onclick="hideProfileForm()">取消</button>
+                </form>
+            </div>
+
+            <!-- 添加基本样式 -->
+            <style>
+                .trending-topics {
+                    max-width: 1200px;
+                    margin: 20px auto;
+                    padding: 0 20px;
+                }
+
+                .topic-list {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                    gap: 20px;
+                    margin-top: 20px;
+                }
+
+                .topic-item {
+                    border: 1px solid #eee;
+                    border-radius: 8px;
+                    padding: 15px;
+                    transition: transform 0.2s;
+                }
+
+                .topic-item:hover {
+                    transform: translateY(-5px);
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                }
+
+                .topic-item img {
+                    width: 100%;
+                    height: 200px;
+                    object-fit: cover;
+                    border-radius: 4px;
+                }
+
+                .topic-item h3 {
+                    margin: 10px 0;
+                    color: #333;
+                    transition: all 0.3s ease;
+                    cursor: pointer;
+                }
+
+                .topic-item h3:hover {
+                    color: #1a73e8;
+                    transform: scale(1.05);
+                    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                }
+
+                .topic-item p {
+                    color: #666;
+                }
+
+                /* 发帖区域样式 */
+                .post-creation {
+                    max-width: 800px;
+                    margin: 20px auto;
+                    padding: 20px;
+                    background: #f8f9fa;
+                    border-radius: 8px;
+                }
+
+                .toggle-post-btn {
+                    width: 100%;
+                    padding: 12px;
+                    background: #1a73e8;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-size: 16px;
+                    transition: background-color 0.3s;
+                }
+
+                .toggle-post-btn:hover {
+                    background: #1557b0;
+                }
+
+                #newPostForm {
+                    margin-top: 15px;
+                    display: none;
+                    animation: slideDown 0.3s ease;
+                }
+
+                @keyframes slideDown {
+                    from {
+                        opacity: 0;
+                        transform: translateY(-10px);
+                    }
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                #newPostForm input,
+                #newPostForm textarea {
+                    width: 100%;
+                    padding: 10px;
+                    margin-bottom: 10px;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    font-size: 16px;
+                    box-sizing: border-box;
+                }
+
+                #newPostForm textarea {
+                    min-height: 120px;
+                    resize: vertical;
+                }
+
+                .form-actions {
+                    display: flex;
+                    gap: 10px;
+                    justify-content: flex-end;
+                }
+
+                .form-actions button {
+                    padding: 8px 16px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-size: 14px;
+                }
+
+                .form-actions button[type="submit"] {
+                    background: #1a73e8;
+                    color: white;
+                    border: none;
+                }
+
+                .cancel-btn {
+                    background: #fff;
+                    border: 1px solid #ddd;
+                    color: #666;
+                }
+
+                .cancel-btn:hover {
+                    background: #f5f5f5;
+                }
+
+                /* 帖子列表样式 */
+                .posts-section {
+                    max-width: 800px;
+                    margin: 20px auto;
+                    padding: 0 20px;
+                }
+
+                .post {
+                    border: 1px solid #eee;
+                    border-radius: 8px;
+                    padding: 15px;
+                    margin-bottom: 20px;
+                    background: white;
+                }
+
+                .post-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 10px;
+                }
+
+                .comments-section {
+                    margin-top: 10px;
+                    padding-top: 10px;
+                    border-top: 1px solid #eee;
+                }
+
+                .comment {
+                    padding: 8px;
+                    margin: 5px 0;
+                    background: #f8f9fa;
+                    border-radius: 4px;
+                }
+
+                .auth-container {
+                    max-width: 800px;
+                    margin: 20px auto;
+                    text-align: right;
+                }
+
+                .auth-buttons button,
+                .user-info button {
+                    padding: 8px 16px;
+                    margin-left: 10px;
+                    background: #1a73e8;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+
+                .auth-form {
+                    position: fixed;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    background: white;
+                    padding: 20px;
+                    border-radius: 8px;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                    z-index: 1000;
+                }
+
+                .auth-form form {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 10px;
+                }
+
+                .auth-form input {
+                    padding: 8px;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                }
+
+                .auth-form button {
+                    padding: 8px 16px;
+                    background: #1a73e8;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+
+                .auth-form button[type="button"] {
+                    background: #666;
+                }
+
+                .post-actions,
+                .comment-actions {
+                    display: inline-flex;
+                    gap: 8px;
+                }
+
+                .post-actions button,
+                .comment-actions button {
+                    padding: 4px 8px;
+                    background: #f0f0f0;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-size: 12px;
+                }
+
+                .post-actions button:hover,
+                .comment-actions button:hover {
+                    background: #e0e0e0;
+                }
+
+                .post-meta,
+                .comment-meta {
+                    display: flex;
+                    align-items: center;
+                    gap: 12px;
+                    color: #666;
+                    font-size: 14px;
+                }
+
+                .avatar-upload {
+                    text-align: center;
+                    margin-bottom: 15px;
+                }
+
+                .avatar-upload img {
+                    width: 100px;
+                    height: 100px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    margin-bottom: 10px;
+                }
+
+                .avatar-upload input[type="file"] {
+                    display: none;
+                }
+
+                .avatar-upload button {
+                    background: #1a73e8;
+                    color: white;
+                    border: none;
+                    padding: 8px 16px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                }
+
+                .search-container {
+                    max-width: 1200px;
+                    margin: 20px auto;
+                    padding: 0 20px;
+                    display: flex;
+                    gap: 10px;
+                }
+
+                .search-container input {
+                    flex: 1;
+                    padding: 10px;
+                    border: 1px solid #ddd;
+                    border-radius: 4px;
+                    font-size: 16px;
+                }
+
+                .search-container button {
+                    padding: 10px 20px;
+                    background: #1a73e8;
+                    color: white;
+                    border: none;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    font-size: 16px;
+                }
+
+                .search-container button:hover {
+                    background: #1557b0;
+                }
+
+                .image-upload {
+                    margin: 10px 0;
+                }
+
+                .preview-container {
+                    position: relative;
+                    display: inline-block;
+                    margin: 10px 0;
+                }
+
+                .preview-container img {
+                    max-width: 200px;
+                    max-height: 200px;
+                    border-radius: 4px;
+                }
+
+                .remove-image {
+                    position: absolute;
+                    top: -10px;
+                    right: -10px;
+                    background: #ff4444;
+                    color: white;
+                    border: none;
+                    border-radius: 50%;
+                    width: 24px;
+                    height: 24px;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+            </style>
+
+            <script src="main.js"></script>
+
+            <!-- 在适当的位置添加用于显示帖子的容器 -->
+            <div id="postsContainer"></div>
+        </main>
+    </div>
+</body>
+</html>
